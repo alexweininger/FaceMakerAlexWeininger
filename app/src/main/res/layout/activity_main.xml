@@ -9,116 +9,138 @@
 
     <Button
         android:id="@+id/button_random"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
-        android:layout_height="39dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="@+id/radioGroup_itemSelector"
+        android:layout_marginTop="8dp"
+        android:text="@string/random_face"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/radioGroup_itemSelector" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBar_b" />
 
     <RadioGroup
         android:id="@+id/radioGroup_itemSelector"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/seekBar_r"
-        app:layout_constraintEnd_toStartOf="@+id/button_random"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintBottom_toBottomOf="@+id/button_random"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_random">
 
         <RadioButton
             android:id="@+id/radioButton_hair"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:checked="false"
-            android:text="RadioButton"
+            android:text="@string/hair"
+            android:textSize="18sp"
             android:theme="@android:style/Widget.Material.CompoundButton.RadioButton"
             tools:layout_editor_absoluteX="138dp"
             tools:layout_editor_absoluteY="289dp" />
 
         <RadioButton
             android:id="@+id/radioButton_eyes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="RadioButton"
+            android:text="@string/eyes"
+            android:textSize="18sp"
             android:theme="@android:style/Widget.Material.CompoundButton.RadioButton" />
 
         <RadioButton
             android:id="@+id/radioButton_skin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="RadioButton"
+            android:text="@string/skin"
+            android:textSize="18sp"
             android:theme="@android:style/Widget.Material.CompoundButton.RadioButton" />
     </RadioGroup>
 
     <Spinner
         android:id="@+id/spinner_hairSelector"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
 
-        tools:layout_editor_absoluteX="652dp" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button_random"
+        app:layout_constraintEnd_toStartOf="@+id/button_random"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup_itemSelector"
+        app:layout_constraintTop_toTopOf="@+id/button_random" />
 
     <SeekBar
         android:id="@+id/seekBar_r"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/seekBar_g"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/label_r" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/label_r"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <SeekBar
         android:id="@+id/seekBar_g"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/seekBar_b"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/seekBar_r"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/seekBar_r" />
+        app:layout_constraintStart_toStartOf="@+id/seekBar_r"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar_r" />
 
     <SeekBar
         android:id="@+id/seekBar_b"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/seekBar_r" />
+        app:layout_constraintStart_toStartOf="@+id/seekBar_r"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar_g" />
 
     <TextView
         android:id="@+id/label_r"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="809dp" />
+        android:layout_marginStart="8dp"
+        android:text="@string/red"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/seekBar_r" />
 
     <TextView
         android:id="@+id/label_g"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginTop="8dp"
+        android:text="@string/green"
         app:layout_constraintStart_toStartOf="@+id/label_r"
-        tools:layout_editor_absoluteY="827dp" />
+        app:layout_constraintTop_toBottomOf="@+id/label_r" />
 
     <TextView
         android:id="@+id/label_b"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginTop="8dp"
+        android:text="@string/blue"
         app:layout_constraintStart_toStartOf="@+id/label_r"
-        tools:layout_editor_absoluteY="852dp" />
+        app:layout_constraintTop_toBottomOf="@+id/label_g" />
+
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_hairSelector" />
 
 </android.support.constraint.ConstraintLayout>

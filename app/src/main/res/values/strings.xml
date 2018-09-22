@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">FaceMakerAlexWeininger</string>
+    <string name="app_name">Face Maker</string>
+
+    <string name="random_face">Random Face</string>
+
+    <string name="hair">Hair</string>
+    <string name="eyes">Eyes</string>
+    <string name="skin">Skin</string>
+
+
+
+    <string name="red">Red</string>
+    <string name="green">Green</string>
+    <string name="blue">Blue</string>
+
+    <string-array name="styles">
+        <item>Style 1</item>
+        <item>Style 2</item>
+        <item>Style 3</item>
+    </string-array>
+
 </resources>
