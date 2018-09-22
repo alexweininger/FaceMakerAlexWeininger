@@ -38,35 +38,74 @@ public class Face extends SurfaceView {
 
         this.hairStyle = random.nextInt(3);
 
-        this.skinColor = Color.argb(random.nextInt(255), random.nextInt(255), random.nextInt(255), random.nextInt(255));
-        this.eyeColor = Color.argb(random.nextInt(255), random.nextInt(255), random.nextInt(255), random.nextInt(255));
-        this.hairColor = Color.argb(random.nextInt(255), random.nextInt(255), random.nextInt(255), random.nextInt(255));
-
+        this.skinColor = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
+        this.eyeColor = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
+        this.hairColor = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
+		invalidate();
         Log.d("user", "face randomized");
-        invalidate();
     }
 
 
     public void onDraw(Canvas canvas) {
-
     	canvas.drawColor(-1);
 
-        Log.d("user", "OnDraw");
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(this.hairColor);
-        canvas.drawCircle(100, 100, 100, paint);
-
-        paint.setColor(this.eyeColor);
-        canvas.drawCircle(300, 100, 100, paint);
-
-        paint.setColor(this.skinColor);
-        canvas.drawCircle(500, 100, 100, paint);
+		drawHairStyle(canvas);
+		drawSkin(canvas);
+        drawEyes(canvas);
     }
 
-    protected void drawHairStyle(int hairStyle) {
+    protected void drawHairStyle(Canvas canvas) {
+	    int x = canvas.getWidth();
+	    int y = canvas.getHeight();
+	    int width = y/4;
+
+	    Paint paint = new Paint();
+	    paint.setStyle(Paint.Style.FILL);
+	    paint.setColor(this.hairColor);
+
+    	if(this.hairStyle == 1) {
+			canvas.drawCircle(x/2, y/2 - width/3, y/4, paint);
+	    } else if (this.hairStyle == 2) {
+		    canvas.drawRect(x/2 - 100, y/2 - width - 40, x/2 - 80, y/2 + y/4, paint);
+		    canvas.drawRect(x/2, y/2 - width - 50, x/2 + 20, y/2 + y/4, paint);
+		    canvas.drawRect(x/2 + 100, y/2 - width - 40, x/2 + 120, y/2 + y/4, paint);
+		    canvas.drawRect(x/2 - 140, y/2 - width - 40, x/2 - 120, y/2 + y/4, paint);
+		    canvas.drawRect(x/2 + 140, y/2 - width - 40, x/2 + 160, y/2 + y/4, paint);
+
+		    canvas.drawRect(x/2 - width, y/2 - width, x/2 + width, y/2 + y/4, paint);
+	    } else if (this.hairStyle == 3) {
+		    canvas.drawCircle(x/2 + 200, y/2 - width/3, y/6, paint);
+		    canvas.drawCircle(x/2, y/2 - width/3, y/6, paint);
+		    canvas.drawCircle(x/2 - 200, y/2 - width/3, y/6, paint);
+	    }
+    }
+
+    protected void drawSkin(Canvas canvas) {
+	    int x = canvas.getWidth();
+	    int y = canvas.getHeight();
+	    int radius = y/3;
+
+	    Paint skinPaint = new Paint();
+	    skinPaint.setColor(this.skinColor);
+	    skinPaint.setStyle(Paint.Style.FILL);
+
+	    canvas.drawCircle(x/2, (y*2)/3, radius, skinPaint);
+    }
+
+    protected void drawEyes(Canvas canvas) {
+	    int x = canvas.getWidth();
+    	int y = canvas.getHeight();
+    	int radius = 70;
+
+    	Paint eyePaint = new Paint();
+    	eyePaint.setColor(this.eyeColor);
+    	eyePaint.setStyle(Paint.Style.FILL);
+
+    	canvas.drawCircle(x/2 - radius*2, y/2, radius, eyePaint);
+	    canvas.drawCircle(x/2 + radius*2, y/2, radius, eyePaint);
 
     }
+
 
     protected void setHairStyle(String hairStyleString) {
         switch (hairStyleString) {
@@ -112,7 +151,6 @@ public class Face extends SurfaceView {
 	    } else if(this.selectedItem == 2) {
 		    this.skinColor = color;
 	    }
-	    invalidate();
     }
 
 

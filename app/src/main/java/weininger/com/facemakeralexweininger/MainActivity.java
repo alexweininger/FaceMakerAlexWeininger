@@ -57,8 +57,11 @@ public class MainActivity extends Activity {
 
 		        color = Color.argb(255, i, green, blue);
 
-		        if(b)
-		            face.setItemColor(color);
+		        if(b) {
+			        face.setItemColor(color);
+			        face.invalidate();
+		        }
+
 	        }
 
 	        @Override
@@ -81,8 +84,11 @@ public class MainActivity extends Activity {
 
 		        color = Color.argb(255, red, i, blue);
 
-		        if(b)
+		        if(b) {
 			        face.setItemColor(color);
+			        face.invalidate();
+		        }
+
 	        }
 
 	        @Override
@@ -105,8 +111,11 @@ public class MainActivity extends Activity {
 
 		        color = Color.argb(255, red, green, i);
 
-		        if(b)
+		        if(b) {
 			        face.setItemColor(color);
+			        face.invalidate();
+		        }
+
 
 	        }
 
@@ -145,7 +154,6 @@ public class MainActivity extends Activity {
 		            face.setSelectedItem(2);
 	            }
 
-
 	            setSeekBarValues(face.getSelectedItemColor());
 
             }
@@ -157,7 +165,7 @@ public class MainActivity extends Activity {
                 Log.d("user", "random button click listener");
                 face.randomize();
                 setSeekBarValues(face.getSelectedItemColor());
-                styleSpinner.setSelection(face.hairStyle, true);
+                styleSpinner.setSelection(face.hairStyle);
             }
         });
 
@@ -171,6 +179,7 @@ public class MainActivity extends Activity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.d("user" , "spinner selected item: " + adapterView.getSelectedItem());
                 face.setHairStyle(adapterView.getSelectedItem().toString());
+
             }
 
             @Override
