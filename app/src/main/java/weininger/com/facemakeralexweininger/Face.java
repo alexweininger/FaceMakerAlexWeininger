@@ -17,6 +17,10 @@ public class Face extends SurfaceView {
     int hairColor;
     int hairStyle;
 
+    int color;
+
+    int selectedItem;
+
     public Face(Context context) {
         super(context);
         setWillNotDraw(false);
@@ -38,9 +42,6 @@ public class Face extends SurfaceView {
         this.eyeColor = Color.argb(random.nextInt(255), random.nextInt(255), random.nextInt(255), random.nextInt(255));
         this.hairColor = Color.argb(random.nextInt(255), random.nextInt(255), random.nextInt(255), random.nextInt(255));
 
-
-
-
         Log.d("user", "face randomized");
         invalidate();
     }
@@ -48,18 +49,18 @@ public class Face extends SurfaceView {
 
     public void onDraw(Canvas canvas) {
 
-
+    	canvas.drawColor(-1);
 
         Log.d("user", "OnDraw");
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(this.eyeColor);
+        paint.setColor(this.hairColor);
         canvas.drawCircle(100, 100, 100, paint);
 
-        paint.setColor(this.skinColor);
+        paint.setColor(this.eyeColor);
         canvas.drawCircle(300, 100, 100, paint);
 
-        paint.setColor(this.hairColor);
+        paint.setColor(this.skinColor);
         canvas.drawCircle(500, 100, 100, paint);
     }
 
@@ -86,5 +87,34 @@ public class Face extends SurfaceView {
         Log.d("user", "style set to: " + this.hairStyle);
         invalidate();
     }
+
+    public void setSelectedItem(int item) {
+    	this.selectedItem = item;
+    }
+
+    public int getSelectedItemColor() {
+    	if(this.selectedItem == 0) {
+    		return this.hairColor;
+	    } else if(this.selectedItem == 1) {
+    		return this.eyeColor;
+	    } else if(this.selectedItem == 2) {
+    		return this.skinColor;
+	    } else {
+    		return 0;
+	    }
+    }
+
+    public void setItemColor(int color) {
+	    if(this.selectedItem == 0) {
+		    this.hairColor = color;
+	    } else if(this.selectedItem == 1) {
+		    this.eyeColor = color;
+	    } else if(this.selectedItem == 2) {
+		    this.skinColor = color;
+	    }
+	    invalidate();
+    }
+
+
 
 }
