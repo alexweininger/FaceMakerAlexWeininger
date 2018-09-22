@@ -7,8 +7,6 @@
     <string name="eyes">Eyes</string>
     <string name="skin">Skin</string>
 
-
-
     <string name="red">Red</string>
     <string name="green">Green</string>
     <string name="blue">Blue</string>
@@ -18,5 +16,4 @@
         <item>Style 2</item>
         <item>Style 3</item>
     </string-array>
-
 </resources>
