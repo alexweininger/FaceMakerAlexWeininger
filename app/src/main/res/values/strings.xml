@@ -12,8 +12,8 @@
     <string name="blue">Blue</string>
 
     <string-array name="styles">
-        <item>Style 1</item>
-        <item>Style 2</item>
-        <item>Style 3</item>
+        <item>Afro Hair</item>
+        <item>Blocky Hair</item>
+        <item>Triple Circle Hair</item>
     </string-array>
 </resources>
