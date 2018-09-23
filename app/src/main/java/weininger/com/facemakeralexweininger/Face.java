@@ -4,7 +4,6 @@
  *  @author: Alex Weininger
  */
 
-
 package weininger.com.facemakeralexweininger;
 
 import android.content.Context;
@@ -12,32 +11,32 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.SurfaceView;
-
 import java.util.Random;
 
 public class Face extends SurfaceView {
 
-	int skinColor;
-	int eyeColor;
-	int hairColor;
-	int hairStyle;
+	// colors for different parts of face
+	private int skinColor;
+	private int eyeColor;
+	private int hairColor;
 
-	int color;
+	private int hairStyle; // 1 - 3 hairStyle
 
-	int selectedItem;
+	private int selectedItem; // value for the currently selected item (hair, eyes, skin)
 
 	public Face(Context context) {
 		super(context);
 		setWillNotDraw(false);
 		randomize();
+		this.selectedItem = 0;
 	}
 
 	public Face(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		setWillNotDraw(false);
 		randomize();
+		this.selectedItem = 0;
 	}
 
 	protected void randomize() {
@@ -48,10 +47,9 @@ public class Face extends SurfaceView {
 		this.skinColor = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
 		this.eyeColor = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
 		this.hairColor = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
-		invalidate();
-		Log.d("user", "face randomized");
-	}
 
+		invalidate();
+	}
 
 	public void onDraw(Canvas canvas) {
 		canvas.drawColor(-1);
@@ -87,6 +85,7 @@ public class Face extends SurfaceView {
 		}
 	}
 
+	// method to draw the skin of the face
 	protected void drawSkin(Canvas canvas) {
 		int x = canvas.getWidth();
 		int y = canvas.getHeight();
@@ -99,6 +98,7 @@ public class Face extends SurfaceView {
 		canvas.drawCircle(x / 2, (y * 2) / 3, radius, skinPaint);
 	}
 
+	// method to draw two eyes on the face
 	protected void drawEyes(Canvas canvas) {
 		int x = canvas.getWidth();
 		int y = canvas.getHeight();
@@ -110,10 +110,9 @@ public class Face extends SurfaceView {
 
 		canvas.drawCircle(x / 2 - radius * 2, y / 2, radius, eyePaint);
 		canvas.drawCircle(x / 2 + radius * 2, y / 2, radius, eyePaint);
-
 	}
 
-
+	// method that takes a String hairStyle and sets it to the appropriate hairStyle integer
 	protected void setHairStyle(String hairStyleString) {
 		switch (hairStyleString) {
 			case "Style 1":
@@ -128,9 +127,7 @@ public class Face extends SurfaceView {
 				break;
 			default:
 				this.hairStyle = 0;
-				Log.d("user", "did not find hairStyleString in switch statement - Face.setHairStyle: STRING: " + hairStyleString);
 		}
-		Log.d("user", "style set to: " + this.hairStyle);
 		invalidate();
 	}
 
@@ -160,5 +157,7 @@ public class Face extends SurfaceView {
 		}
 	}
 
-
+	protected int getHairStyle() {
+		return this.hairStyle;
+	}
 }
