@@ -49,9 +49,7 @@ public class MainActivity extends Activity {
 				setSeekBarValues(faceView.getSelectedItemColor()); // update SeekBars
 				Random random = new Random();
 
-
 				int hairStyle = random.nextInt(3);
-
 				styleSpinner.setSelection(hairStyle, true); // update Spinner
 			}
 		});
