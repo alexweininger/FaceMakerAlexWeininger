@@ -176,6 +176,17 @@ public class MainActivity extends Activity {
 	 * @param color - color to set the seekbars to
 	 */
 	private void setSeekBarValues(int color) {
+		/**
+		 External Citation
+		 Date: 29 September 2018
+		 Problem: Needed to access the individual component values of the color, but
+		 couldn't find a method that wasn't only for Android 28.
+		 Resource:
+		 https://developer.android.com/reference/android/graphics/Color
+		 Solution: I used the red(), green(), and blue() methods described on the documentation
+		 page for Android.graphics.Color.
+		 */
+
 		// set SeekBar progress to (r, g, b) color component of the color
 		seekBar_r.setProgress(red(color));
 		seekBar_g.setProgress(green(color));
