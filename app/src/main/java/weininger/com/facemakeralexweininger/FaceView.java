@@ -13,9 +13,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.SurfaceView;
-
 import java.util.Random;
 
 public class FaceView extends SurfaceView {
@@ -27,18 +25,13 @@ public class FaceView extends SurfaceView {
 
 	// value for the currently selected item of the RadioGroup (hair, eyes, skin)
 	private int selectedItem;
-
 	private int hairStyle; // integer from 0 to 2 representing hairStyle
 
 	public FaceView(Context context) {
 		super(context);
 		setWillNotDraw(false);
 
-		this.skinColor = 0;
-		this.eyeColor = 0;
-		this.hairColor = 0;
 		this.selectedItem = 0;
-		this.hairStyle = 0;
 		randomize(); // randomize the features of the face right away
 	}
 
@@ -46,18 +39,27 @@ public class FaceView extends SurfaceView {
 		super(context, attrs);
 		setWillNotDraw(false);
 
-		this.skinColor = 0;
-		this.eyeColor = 0;
-		this.hairColor = 0;
 		this.selectedItem = 0;
-		this.hairStyle = 0;
 		randomize(); // randomize the features and colors of the face right away
+	}
+
+	// setters for colors of the items
+	public void setEyeColor(int eyeColor) {
+		this.eyeColor = eyeColor;
+	}
+
+	public void setSkinColor(int skinColor) {
+		this.skinColor = skinColor;
+	}
+
+	public void setHairColor(int hairColor) {
+		this.hairColor = hairColor;
 	}
 
 	protected void randomize() {
 		Random random = new Random();
 
-		Log.d("user", "random hairstyle: " + this.hairStyle);
+		this.hairStyle = random.nextInt(3);
 
 		this.skinColor = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
 		this.eyeColor = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
@@ -99,12 +101,9 @@ public class FaceView extends SurfaceView {
 		} else if (hairStyle == 1) {
 
 			// drawing rectangles for cool block hair that makes Blocky Hair
-
 			for(int i = 0; i < 13; i++) {
-				canvas.drawRect((x / 2 + (i*50)) - width - 35, y / 2 - width - 40, x / 2 + i*50 + 20 - width - 35, y / 2 + y / 4, hairPaint);
+				canvas.drawRect(x / 2 - (y - 100) / 3 + (i*(y/21)), y / 2 - width - 40, x / 2 - (y - 100) / 3 + i*(y/21) + y/30, (3*y) / 4, hairPaint);
 			}
-
-
 
 		} else if (hairStyle == 2) {
 
