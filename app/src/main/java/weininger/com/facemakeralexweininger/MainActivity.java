@@ -10,6 +10,7 @@ package weininger.com.facemakeralexweininger;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +19,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+
+import java.util.Random;
 
 import static android.graphics.Color.blue;
 import static android.graphics.Color.green;
@@ -44,8 +47,12 @@ public class MainActivity extends Activity {
 			public void onClick(View view) {
 				faceView.randomize();
 				setSeekBarValues(faceView.getSelectedItemColor()); // update SeekBars
-				styleSpinner.setSelection(faceView.getHairStyle(), true); // update Spinner
-				faceView.invalidate();
+				Random random = new Random();
+
+
+				int hairStyle = random.nextInt(3);
+
+				styleSpinner.setSelection(hairStyle, true); // update Spinner
 			}
 		});
 
@@ -83,11 +90,14 @@ public class MainActivity extends Activity {
 		styleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-				faceView.setHairStyle(adapterView.getSelectedItem().toString()); // set hairStyle to selected hairStyle from spinner
+				Log.d("user", "spinner item position: " + adapterView.getSelectedItemPosition());
+
+				faceView.setHairStyle(adapterView.getSelectedItemPosition()); // set hairStyle to selected hairStyle from spinner
 			}
 
 			@Override
-			public void onNothingSelected(AdapterView<?> adapterView) {}
+			public void onNothingSelected(AdapterView<?> adapterView) {
+			}
 		});
 
 		// defining the SeekBars
@@ -105,17 +115,17 @@ public class MainActivity extends Activity {
 				int green = green(color);
 
 				color = Color.argb(255, i, green, blue);
-
-				if (b) {
-					faceView.setItemColor(color);
-					faceView.invalidate();
-				}
+				faceView.setItemColor(color);
+				faceView.invalidate();
 			}
 
 			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {}
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+
 			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {}
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
 		});
 
 		// SeekBar for g
@@ -127,17 +137,17 @@ public class MainActivity extends Activity {
 				int red = red(color);
 
 				color = Color.argb(255, red, i, blue);
-
-				if (b) {
-					faceView.setItemColor(color);
-					faceView.invalidate();
-				}
+				faceView.setItemColor(color);
+				faceView.invalidate();
 			}
 
 			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {}
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+
 			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {}
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
 		});
 
 		// SeekBar for b
@@ -150,16 +160,17 @@ public class MainActivity extends Activity {
 
 				color = Color.argb(255, red, green, i);
 
-				if (b) {
-					faceView.setItemColor(color);
-					faceView.invalidate();
-				}
+				faceView.setItemColor(color);
+				faceView.invalidate();
 			}
 
 			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {}
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+
 			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {}
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
 		});
 	}
 

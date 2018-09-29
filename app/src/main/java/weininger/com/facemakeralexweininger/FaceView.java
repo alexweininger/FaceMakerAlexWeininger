@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SurfaceView;
 import java.util.Random;
 
@@ -42,25 +43,23 @@ public class FaceView extends SurfaceView {
 	protected void randomize() {
 		Random random = new Random();
 
-		this.hairStyle = random.nextInt(2) + 1;
+		Log.d("user", "random hairstyle: " + this.hairStyle);
 
 		this.skinColor = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
 		this.eyeColor = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
 		this.hairColor = Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
 
-		invalidate();
 	}
 
 	public void onDraw(Canvas canvas) {
 		canvas.drawColor(-1);
 
-		drawHairStyle(canvas);
+		drawHairStyle(canvas, this.hairStyle);
 		drawSkin(canvas);
 		drawEyes(canvas);
 	}
 
-	protected void drawHairStyle(Canvas canvas) {
-
+	protected void drawHairStyle(Canvas canvas, int hairStyle) {
 		int x = canvas.getWidth(); // getting the width and height of canvas
 		int y = canvas.getHeight();
 		int width = y / 4;
@@ -69,9 +68,9 @@ public class FaceView extends SurfaceView {
 		hairPaint.setStyle(Paint.Style.FILL);
 		hairPaint.setColor(this.hairColor);
 
-		if (this.hairStyle == 1) {
+		if (hairStyle == 0) {
 			canvas.drawCircle(x / 2, y / 2 - width / 3, y / 4, hairPaint);
-		} else if (this.hairStyle == 2) {
+		} else if (hairStyle == 1) {
 
 			// drawing rectangles for cool hair
 			canvas.drawRect(x / 2 - 100, y / 2 - width - 40, x / 2 - 80, y / 2 + y / 4, hairPaint);
@@ -82,7 +81,7 @@ public class FaceView extends SurfaceView {
 
 			canvas.drawRect(x / 2 - width, y / 2 - width, x / 2 + width, y / 2 + y / 4, hairPaint);
 
-		} else if (this.hairStyle == 3) {
+		} else if (hairStyle == 2) {
 
 			canvas.drawCircle(x / 2 + 200, y / 2 - width / 3, y / 6, hairPaint);
 			canvas.drawCircle(x / 2, y / 2 - width / 3, y / 6, hairPaint);
@@ -117,24 +116,6 @@ public class FaceView extends SurfaceView {
 		canvas.drawCircle(x / 2 + radius * 2, y / 2, radius, eyePaint);
 	}
 
-	// method that takes a String hairStyle and sets it to the appropriate hairStyle integer
-	protected void setHairStyle(String hairStyleString) {
-		switch (hairStyleString) {
-			case "Afro Hair":
-				this.hairStyle = 1;
-				break;
-			case "Blocky Hair":
-				this.hairStyle = 2;
-				break;
-			case "Triple Circle Hair":
-				this.hairStyle = 3;
-				break;
-			default:
-				this.hairStyle = 1;
-		}
-		invalidate();
-	}
-
 	public void setSelectedItem(int item) { // returns currently selected item
 		this.selectedItem = item;
 	}
@@ -163,7 +144,8 @@ public class FaceView extends SurfaceView {
 		invalidate();
 	}
 
-	protected int getHairStyle() { // getter for hairStyle
-		return this.hairStyle;
+	protected void setHairStyle(int hairStyle) {
+		this.hairStyle = hairStyle;
+		invalidate();
 	}
 }
