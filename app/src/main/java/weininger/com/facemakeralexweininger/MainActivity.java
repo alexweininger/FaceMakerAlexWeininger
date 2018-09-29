@@ -1,9 +1,9 @@
 /*
- *  MainActivity.java - main class that handles logic of app
+ *  MainActivity.java - main class that handles logic of app, contains all listeners for the
+ *  SeekBars, RadioButtons, Spinner, and Button.
  *
  *  @author: Alex Weininger
  */
-
 
 package weininger.com.facemakeralexweininger;
 

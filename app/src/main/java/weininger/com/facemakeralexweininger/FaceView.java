@@ -1,5 +1,7 @@
 /*
- *  Face.java - class contains methods to draw the face
+ *  Face.java - class contains methods to draw the face, set/get colors of the different
+ *  parts of the face.  Face.java also contains the randomize() method which randomizes
+ *  the colors and features of the face.
  *
  *  @author: Alex Weininger
  */
@@ -13,6 +15,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceView;
+
 import java.util.Random;
 
 public class FaceView extends SurfaceView {
@@ -22,22 +25,33 @@ public class FaceView extends SurfaceView {
 	private int eyeColor;
 	private int hairColor;
 
-	private int hairStyle; // 1 - 3 hairStyle
+	// value for the currently selected item of the RadioGroup (hair, eyes, skin)
+	private int selectedItem;
 
-	private int selectedItem; // value for the currently selected item (hair, eyes, skin)
+	private int hairStyle; // integer from 0 to 2 representing hairStyle
 
 	public FaceView(Context context) {
 		super(context);
 		setWillNotDraw(false);
-		randomize();
+
+		this.skinColor = 0;
+		this.eyeColor = 0;
+		this.hairColor = 0;
 		this.selectedItem = 0;
+		this.hairStyle = 0;
+		randomize(); // randomize the features of the face right away
 	}
 
 	public FaceView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		setWillNotDraw(false);
-		randomize();
+
+		this.skinColor = 0;
+		this.eyeColor = 0;
+		this.hairColor = 0;
 		this.selectedItem = 0;
+		this.hairStyle = 0;
+		randomize(); // randomize the features and colors of the face right away
 	}
 
 	protected void randomize() {
@@ -51,45 +65,59 @@ public class FaceView extends SurfaceView {
 
 	}
 
+	/**
+	 * onDraw - method that implements the SurfaceView class drawing
+	 * @param canvas
+	 */
 	public void onDraw(Canvas canvas) {
-		canvas.drawColor(-1);
+		canvas.drawColor(-1); // make the entire canvas white
 
 		drawHairStyle(canvas, this.hairStyle);
 		drawSkin(canvas);
 		drawEyes(canvas);
 	}
 
+	/**
+	 * drawHairStyle() - draws hair corresponding to the selected hair and hairColor
+	 * @param canvas
+	 * @param hairStyle
+	 */
 	protected void drawHairStyle(Canvas canvas, int hairStyle) {
 		int x = canvas.getWidth(); // getting the width and height of canvas
 		int y = canvas.getHeight();
 		int width = y / 4;
 
+		// creating a paint to draw the hair with
 		Paint hairPaint = new Paint();
 		hairPaint.setStyle(Paint.Style.FILL);
 		hairPaint.setColor(this.hairColor);
 
 		if (hairStyle == 0) {
-			canvas.drawCircle(x / 2, y / 2 - width / 3, y / 4, hairPaint);
+
+			// drawing the circle for Afro Hair
+			canvas.drawCircle(x / 2, y / 2 - width / 3, y / 4 + 100, hairPaint);
 		} else if (hairStyle == 1) {
 
-			// drawing rectangles for cool hair
-			canvas.drawRect(x / 2 - 100, y / 2 - width - 40, x / 2 - 80, y / 2 + y / 4, hairPaint);
-			canvas.drawRect(x / 2, y / 2 - width - 50, x / 2 + 20, y / 2 + y / 4, hairPaint);
-			canvas.drawRect(x / 2 + 100, y / 2 - width - 40, x / 2 + 120, y / 2 + y / 4, hairPaint);
-			canvas.drawRect(x / 2 - 140, y / 2 - width - 40, x / 2 - 120, y / 2 + y / 4, hairPaint);
-			canvas.drawRect(x / 2 + 140, y / 2 - width - 40, x / 2 + 160, y / 2 + y / 4, hairPaint);
+			// drawing rectangles for cool block hair that makes Blocky Hair
 
-			canvas.drawRect(x / 2 - width, y / 2 - width, x / 2 + width, y / 2 + y / 4, hairPaint);
+			for(int i = 0; i < 13; i++) {
+				canvas.drawRect((x / 2 + (i*50)) - width - 35, y / 2 - width - 40, x / 2 + i*50 + 20 - width - 35, y / 2 + y / 4, hairPaint);
+			}
+
+
 
 		} else if (hairStyle == 2) {
 
+			// drawing three circles to make Triple Circle Hair
 			canvas.drawCircle(x / 2 + 200, y / 2 - width / 3, y / 6, hairPaint);
 			canvas.drawCircle(x / 2, y / 2 - width / 3, y / 6, hairPaint);
 			canvas.drawCircle(x / 2 - 200, y / 2 - width / 3, y / 6, hairPaint);
 		}
 	}
 
-	// method to draw the skin of the face
+	/** drawSkin - method to draw the face
+	 * @param canvas
+	 */
 	protected void drawSkin(Canvas canvas) {
 		int x = canvas.getWidth(); // getting the width and height of canvas
 		int y = canvas.getHeight();
@@ -102,7 +130,9 @@ public class FaceView extends SurfaceView {
 		canvas.drawCircle(x / 2, (y * 2) / 3, radius, skinPaint);
 	}
 
-	// method to draw two eyes on the face
+	/** drawEyes - method to draw two eyes on the face
+	 * @param canvas
+	 */
 	protected void drawEyes(Canvas canvas) {
 		int x = canvas.getWidth(); // getting the width and height of canvas
 		int y = canvas.getHeight();
@@ -116,10 +146,16 @@ public class FaceView extends SurfaceView {
 		canvas.drawCircle(x / 2 + radius * 2, y / 2, radius, eyePaint);
 	}
 
+	/** setSelectedItem - sets the selected button variable
+	 * @param item
+	 */
 	public void setSelectedItem(int item) { // returns currently selected item
 		this.selectedItem = item;
 	}
 
+	/** getSelectedItemColor
+	 * @return integer representing the color of the currently selected item
+	 */
 	public int getSelectedItemColor() { // returns the currently selected color
 		if (this.selectedItem == 0) {
 			return this.hairColor;
@@ -132,7 +168,9 @@ public class FaceView extends SurfaceView {
 		}
 	}
 
-	// sets the item color to the currently selected item color
+	/** setItemColor - sets the item color to the currently selected item color
+	 * @param color
+	 */
 	public void setItemColor(int color) {
 		if (this.selectedItem == 0) {
 			this.hairColor = color;
@@ -144,6 +182,9 @@ public class FaceView extends SurfaceView {
 		invalidate();
 	}
 
+	/** setHairStyle - sets the current hairStyle integer
+	 * @param hairStyle
+	 */
 	protected void setHairStyle(int hairStyle) {
 		this.hairStyle = hairStyle;
 		invalidate();
