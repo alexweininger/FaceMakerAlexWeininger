@@ -167,13 +167,13 @@ public class MainActivity extends Activity {
 			public void onStopTrackingTouch(SeekBar seekBar) {}
 		});
 		// set the face to the face view
-		faceView = (FaceView) findViewById(R.id.face);
+		faceView = findViewById(R.id.face);
 		setSeekBarValues(faceView.getSelectedItemColor());
 	}
 
 	/**
 	 * setSeekBarValues - sets the seekbars according the the color of the item selected
-	 * @param color
+	 * @param color - color to set the seekbars to
 	 */
 	private void setSeekBarValues(int color) {
 		// set SeekBar progress to (r, g, b) color component of the color

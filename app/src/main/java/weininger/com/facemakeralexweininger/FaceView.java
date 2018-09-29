@@ -69,7 +69,7 @@ public class FaceView extends SurfaceView {
 
 	/**
 	 * onDraw - method that implements the SurfaceView class drawing
-	 * @param canvas
+	 * @param canvas - main canvas
 	 */
 	public void onDraw(Canvas canvas) {
 		canvas.drawColor(-1); // make the entire canvas white
@@ -81,8 +81,8 @@ public class FaceView extends SurfaceView {
 
 	/**
 	 * drawHairStyle() - draws hair corresponding to the selected hair and hairColor
-	 * @param canvas
-	 * @param hairStyle
+	 * @param canvas - main canvas
+	 * @param hairStyle - integer representing hairStyle
 	 */
 	protected void drawHairStyle(Canvas canvas, int hairStyle) {
 		int x = canvas.getWidth(); // getting the width and height of canvas
@@ -115,7 +115,7 @@ public class FaceView extends SurfaceView {
 	}
 
 	/** drawSkin - method to draw the face
-	 * @param canvas
+	 * @param canvas - main canvas
 	 */
 	protected void drawSkin(Canvas canvas) {
 		int x = canvas.getWidth(); // getting the width and height of canvas
@@ -130,7 +130,7 @@ public class FaceView extends SurfaceView {
 	}
 
 	/** drawEyes - method to draw two eyes on the face
-	 * @param canvas
+	 * @param canvas - main canvas
 	 */
 	protected void drawEyes(Canvas canvas) {
 		int x = canvas.getWidth(); // getting the width and height of canvas
@@ -146,7 +146,7 @@ public class FaceView extends SurfaceView {
 	}
 
 	/** setSelectedItem - sets the selected button variable
-	 * @param item
+	 * @param item - integer representing the item to set as selected
 	 */
 	public void setSelectedItem(int item) { // returns currently selected item
 		this.selectedItem = item;
@@ -168,7 +168,7 @@ public class FaceView extends SurfaceView {
 	}
 
 	/** setItemColor - sets the item color to the currently selected item color
-	 * @param color
+	 * @param color - int color to set for the item
 	 */
 	public void setItemColor(int color) {
 		if (this.selectedItem == 0) {
@@ -182,7 +182,7 @@ public class FaceView extends SurfaceView {
 	}
 
 	/** setHairStyle - sets the current hairStyle integer
-	 * @param hairStyle
+	 * @param hairStyle - integer representing the hairStlye (0-2)
 	 */
 	protected void setHairStyle(int hairStyle) {
 		this.hairStyle = hairStyle;
